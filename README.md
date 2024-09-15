@@ -25,7 +25,7 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
+   git clone https://github.com/Aad-hil/Itinerary-planner.git
    cd itinerary-planner
    ```
 2. Set Up a Virtual Environment (recommended)
