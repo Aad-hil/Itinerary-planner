@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-center mb-5">
+    <h1>About Us</h1>
+    <p class="lead">We help you plan your dream trips with ease!</p>
+    <img src="{{ background_image_url }}" class="img-fluid mb-4" alt="About Us" width="500" height="400">
+</div>
+
+<div class="container text-center">
+    <h2>What Our Users Say</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"This itinerary planner made my vacation stress-free! Highly recommended!"</p>
+                    <br>
+                    <footer class="blockquote-footer">John Doe</footer>
+                </blockquote>
+            </div>
+            <div class="carousel-item">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"I found the best places to visit and managed to stick to my schedule perfectly!"</p>
+                    <br>
+                    <footer class="blockquote-footer">Sarah Williams</footer>
+                </blockquote>
+            </div>
+            <div class="carousel-item">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"Super easy to use and great suggestions. My trip was amazing!"</p>
+                    <br>
+                    <footer class="blockquote-footer">Emily Chen</footer>
+                </blockquote>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<div class="container text-center my-5">
+    <h2>Plan Your Next Adventure!</h2>
+    <p>Ready to explore the world? Check out the best places to visit right here.</p>
+    <a href="{{ url_for('places') }}" class="btn btn-primary btn-lg">Explore Places to Visit</a>
+</div>
+{% endblock %}

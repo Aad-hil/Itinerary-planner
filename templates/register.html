@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+    <h1>Register</h1>
+    <img src="{{ url_for('static', filename='images/register.jpg') }}" class="img-fluid" alt="Register">
+</div>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form method="POST" id="registerForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <small class="form-text text-muted">
+                    Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.
+                </small>
+                <!-- Error message for invalid password -->
+                <div id="passwordError" class="text-danger mt-2" style="display:none;">
+                    Password does not meet the requirements.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('registerForm');
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+
+    // Function to validate the password
+    function validatePassword(password) {
+        const minLength = 8;
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        return password.length >= minLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+    }
+
+    // Form submission handler
+    form.addEventListener('submit', function (e) {
+        const password = passwordInput.value;
+
+        // Validate password before submission
+        if (!validatePassword(password)) {
+            e.preventDefault();  // Prevent form submission
+            passwordError.style.display = 'block';  // Show error message
+        } else {
+            passwordError.style.display = 'none';  // Hide error message if valid
+        }
+    });
+</script>
+{% endblock %}

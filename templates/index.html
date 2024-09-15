@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+    <h1>Your Itineraries</h1>
+    <img src="{{ url_for('static', filename='images/travel.jpg') }}" class="img-fluid" alt="Travel">
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form action="/add" method="POST" class="mb-4">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Date:</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="mb-3">
+                <label for="details" class="form-label">Details:</label>
+                <textarea class="form-control" id="details" name="details" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Itinerary</button>
+        </form>
+    </div>
+</div>
+
+<h2 class="text-center">Your Itineraries</h2>
+
+<div class="row">
+    {% for itinerary in itineraries %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ itinerary.title }}</h5>
+                <p class="card-text"><strong>Date:</strong> {{ itinerary.date }}</p>
+                <p class="card-text"><strong>Location:</strong> {{ itinerary.location }}</p>
+                <p class="card-text">{{ itinerary.details }}</p>
+                <form action="/delete/{{ itinerary.id }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-12">
+        <p>No itineraries available</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

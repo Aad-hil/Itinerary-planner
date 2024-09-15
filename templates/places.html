@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Top Tourist Places</h1>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display:none;">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <!-- Places List -->
+    <div class="row" id="placesContainer" style="display:none;">
+        {% for place in places %}
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card">
+                <img src="{{ place.image_url }}" class="card-img-top" alt="{{ place.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ place.name }}</h5>
+                    <p class="card-text">{{ place.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-12">
+            <p>No places available to visit.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if current_page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('places', page=current_page-1) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == current_page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('places', page=p) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            {% if current_page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('places', page=current_page+1) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+<!-- JavaScript for Spinner -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var spinner = document.getElementById('loadingSpinner');
+        var placesContainer = document.getElementById('placesContainer');
+
+        // Show the spinner
+        spinner.style.display = 'block';
+
+        // Simulate image loading
+        setTimeout(function() {
+            // Hide the spinner and show the places container once data is loaded
+            spinner.style.display = 'none';
+            placesContainer.style.display = 'block';
+        }, 2000); // Simulate a 2-second delay for loading (adjust as needed)
+    });
+</script>
+{% endblock %}
